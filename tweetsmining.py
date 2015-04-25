@@ -4,7 +4,7 @@ import tweepy
 import json
 import couchdb
 
-#Credentials, keep private
+#Twitter credentials, keep private
 CONSUMER_KEY = 'RWG77BWeRymf1FoFWIKZjigli'
 CONSUMER_SECRET = 'TDyQCxKxB9o5zxIe9WCQETy3Paw8T57DuBB772SA5WZYqOIUSL'
 ACCESS_TOKEN = '22651013-tL49l2oBX7ooochixyuzkTqhJBbJbq2oVrDSuEYlB'
