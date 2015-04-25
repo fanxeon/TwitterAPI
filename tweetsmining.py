@@ -16,7 +16,10 @@ api = tweepy.API(auth)
 
 #twitter db on couchdb
 server = couchdb.Server()
-db = server['twitter']
+try:
+    db = server.create('twitter')
+except:
+    db = server['twitter']
 
 #Streaming listerner
 class StdOutListener(StreamListener):
