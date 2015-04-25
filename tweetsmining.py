@@ -3,6 +3,14 @@ from tweepy import Stream
 import tweepy
 import json
 import couchdb
+import datetime
+
+#logs
+logsfile = 'tweetsmininglogs.txt'
+
+#Opening output file then printing time log
+mylogsfile = open(logsfile, 'w')
+mylogsfile.write('Job started on %s.\n' % (datetime.datetime.now()))
 
 #Twitter credentials, keep private
 CONSUMER_KEY = 'RWG77BWeRymf1FoFWIKZjigli'
@@ -38,6 +46,7 @@ class StdOutListener(StreamListener):
 
     def on_error(self, status):
         print(status)
+        mylogsfile.write('Error Status: %s %s.\n' % (status,datetime.datetime.now()))
 
 if __name__ == '__main__':
     listener = StdOutListener()
