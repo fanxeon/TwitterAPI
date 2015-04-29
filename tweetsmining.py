@@ -38,7 +38,10 @@ class StdOutListener(StreamListener):
         try:
            #print(tweetDoc)
            tweetDoc["_id"] = str(tweetDoc['id'])
-           dbdoc = db.save(tweetDoc)
+           MyCity = tweetDoc['place']['name']
+           #Boston City only
+           if MyCity == 'Boston':
+              dbdoc = db.save(tweetDoc)
         except:
            print(tweetDoc["_id"], "Duplication occured")
            pass
@@ -52,4 +55,4 @@ if __name__ == '__main__':
     listener = StdOutListener()
     twitterStream = Stream(auth, listener)
     #Boston city filteration
-    twitterStream.filter(locations=[-71.06,42.22,-71.04,42.38])
+    twitterStream.filter(locations=[-71.192,42.225,-70.994,42.422])
