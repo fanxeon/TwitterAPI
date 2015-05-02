@@ -55,4 +55,5 @@ if __name__ == '__main__':
     listener = StdOutListener()
     twitterStream = Stream(auth, listener)
     #Boston city filteration
-    twitterStream.filter(locations=[-71.192,42.225,-70.994,42.422])
+    #twitterStream.filter(locations=[-71.192,42.225,-70.994,42.422])
+    twitterStream.filter(locations=[-72,42.5,-70,43.5])
