@@ -1,7 +1,6 @@
 import time
 import tweepy
 import json
-import jsonpickle
 import couchdb
 import datetime
 
