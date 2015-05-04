@@ -15,8 +15,9 @@ Software:
 
 Prerequisites:
 - Ensure the SSH keypair assigned to the cluster is available via ssh-agent.
-- Source the OpenStack credentials.
-- Source the DNSimple credentials.
+  This is required for Ansible.
+- Expose OpenStack credentials as environment variables.
+- Expose DNSimple credentials as environment variables.
 
 To configure:
 - Adjust `./cluster-config.sh`
