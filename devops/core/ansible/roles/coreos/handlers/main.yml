@@ -1,0 +1,5 @@
+---
+- name: daemon-reload weave
+  command: /usr/bin/systemctl daemon-reload
+- name: restart weave
+  service: name=weave state=restarted

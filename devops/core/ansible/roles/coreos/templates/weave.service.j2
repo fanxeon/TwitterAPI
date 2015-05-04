@@ -1,0 +1,14 @@
+[Unit]
+After=install-weave.service
+Description=Weave Network
+Documentation=http://zettio.github.io/weave/
+Requires=install-weave.service
+
+[Service]
+EnvironmentFile=/etc/weave.env
+ExecStartPre=/opt/bin/weave launch $WEAVE_PEERS
+ExecStartPre=/opt/bin/weave launch-dns $WEAVEDNS_ADDR
+ExecStart=/usr/bin/docker logs -f weave
+SuccessExitStatus=2
+ExecStop=/opt/bin/weave stop-dns
+ExecStop=/opt/bin/weave stop

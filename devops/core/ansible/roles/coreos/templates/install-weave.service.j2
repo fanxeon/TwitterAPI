@@ -1,0 +1,16 @@
+[Unit]
+After=network-online.target
+After=docker.service
+Description=Install Weave
+Documentation=http://zettio.github.io/weave/
+Requires=network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStartPre=/usr/bin/wget -N -P /opt/bin \
+  https://raw.github.com/zettio/weave/master/weave 
+ExecStartPre=/usr/bin/chmod +x /opt/bin/weave
+ExecStartPre=/usr/bin/docker pull zettio/weave:latest
+ExecStart=/bin/echo Wave Installed
