@@ -41,7 +41,7 @@ resource "openstack_compute_instance_v2" "peer" {
 # Configure peer security groups
 resource "openstack_compute_secgroup_v2" "peer" {
   name = "peer"
-  description = "peer security group"
+  description = "Peer security group"
 
   # Enable SSH to all
   rule {
