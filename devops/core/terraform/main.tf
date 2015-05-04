@@ -28,7 +28,6 @@ resource "dnsimple_record" "peer" {
 resource "openstack_compute_instance_v2" "peer" {
   name = "${var.peer_name_prefix}${count.index}"
   availability_zone = "${var.availability_zone}"
-  # CoreOS 633.1.0
   image_id = "${var.image_id}"
   flavor_id = "${var.flavor_id}"
   key_pair = "${var.keypair}"
