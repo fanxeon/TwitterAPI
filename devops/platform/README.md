@@ -21,7 +21,7 @@ Prerequisites:
 
 To configure:
 - Adjust `./platform-config.sh` to the platform to be built.
-- Adjust `$PLATFORM/cluster-config.sh` where $PLATFORM is the desired platform
+- Adjust `$PLATFORM/cluster-config.sh` where `$PLATFORM` is the desired platform
   found in `./platform-config.sh`.
 
 To launch or update existing build (idempotent):
