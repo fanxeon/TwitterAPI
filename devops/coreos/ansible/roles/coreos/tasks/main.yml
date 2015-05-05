@@ -35,7 +35,7 @@
   service: name=install-weave state=started
 
 - name: ensure weave service
-  service: name=weave state=started
+  service: name=weave state=started enabled=true
 
 - name: ensure busybox install service
   service: name=install-busybox state=started
