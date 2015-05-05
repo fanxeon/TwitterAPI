@@ -15,17 +15,6 @@ import os
 import json
 from urlparse import urlparse
 
-# This is a workaround to ensure API works for both OpenStack Swift
-# and EC2.
-# if not boto.config.get('s3', 'use-sigv4'):
-#     boto.config.add_section('s3')
-#     boto.config.set('s3', 'use-sigv4', 'True')
-# if not boto.config.get('Boto', 'emr_region_name'):
-#     boto.config.add_section('Boto')
-#     boto.config.set('Boto', 'emr_region_name', 'Melbourne')
-# This is another workaround (setting environment variable defined below)
-# os.environ['S3_USE_SIGV4'] = 'True'
-
 # Build connection
 s3_url = urlparse(os.environ['S3_URL'])
 conn = boto.s3.connection.S3Connection(
@@ -63,7 +52,7 @@ def get_bucket(conn, bucket_name):
 bucket = get_bucket(conn, bucket_name)
 
 # Save objects to bucket (idempotent)
-with open('./example-tweet.json') as handle:    
+with open('./example-tweets.json') as handle:    
     twitter_response = json.load(handle)
 
 for tweet in twitter_response['statuses']:
