@@ -37,9 +37,6 @@ apply_template $TEMPLATE_DIR/terraform.tfvars.j2 > terraform.tfvars
 # Provision/update cluster
 terraform apply
 
-# Retrieve outputs
-export PEER_COUNT=$(terraform output peer_count)
-
 ### Ansible stage
 cd $BASE_DIR/ansible
 
