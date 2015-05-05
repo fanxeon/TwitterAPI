@@ -16,7 +16,7 @@ export DOMAIN="t19.ninja"
 export SUBDOMAIN="cor"
 # Domain record's TTL
 export DNS_TTL=5
-# Image ID
+# Image ID (CoreOS 633.1.0)
 export IMAGE_ID="6dbf5466-1e9e-4c52-a295-5f7cb9e3fdb5"
 # Etcd master count
 export ETCD_MASTER_COUNT=3
