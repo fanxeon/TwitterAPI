@@ -27,6 +27,9 @@ terraform destroy
 rm -f cloud-config.yaml
 rm -f terraform.tfvars
 
+# Remove state (opinionated)
+rm -f terraform.tfstate*
+
 ### Finalization stage
 cd $BASE_DIR
 

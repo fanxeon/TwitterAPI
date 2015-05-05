@@ -26,7 +26,7 @@ resource "dnsimple_record" "peer" {
 
 # Configure peer instances
 resource "openstack_compute_instance_v2" "peer" {
-  name = "${var.peer_name_prefix}${count.index}"
+  name = "${var.peer_name_prefix}${count.index+1}"
   availability_zone = "${var.availability_zone}"
   image_id = "${var.image_id}"
   flavor_id = "${var.flavor_id}"

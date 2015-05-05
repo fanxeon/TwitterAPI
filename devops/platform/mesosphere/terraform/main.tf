@@ -36,7 +36,7 @@ resource "dnsimple_record" "slave" {
 
 # Configure master instances
 resource "openstack_compute_instance_v2" "master" {
-  name = "${var.master_name_prefix}${count.index}"
+  name = "${var.master_name_prefix}${count.index+1}"
   availability_zone = "${var.availability_zone}"
   image_id = "${var.image_id}"
   flavor_id = "${var.flavor_id}"
@@ -46,7 +46,7 @@ resource "openstack_compute_instance_v2" "master" {
 }
 # Configure slave instances
 resource "openstack_compute_instance_v2" "slave" {
-  name = "${var.slave_name_prefix}${count.index}"
+  name = "${var.slave_name_prefix}${count.index+1}"
   availability_zone = "${var.availability_zone}"
   image_id = "${var.image_id}"
   flavor_id = "${var.flavor_id}"

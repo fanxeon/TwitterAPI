@@ -22,5 +22,7 @@ export SUBDOMAIN="mes"
 export DNS_TTL=5
 # Image ID (Ubuntu 14.04 LTS)
 export IMAGE_ID="eeedf697-5a41-4d91-a478-01bb21e32cbe"
+# UNUSED
+export ETCD_MASTER_COUNT=3
 # Ansible ssh host checking
 export ANSIBLE_HOST_KEY_CHECKING=False

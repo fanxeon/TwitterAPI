@@ -1,2 +1,2 @@
 # Platform config
-export PLATFORM=coreos
+export PLATFORM=mesosphere
