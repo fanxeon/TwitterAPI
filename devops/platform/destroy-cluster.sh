@@ -1,10 +1,15 @@
 #!/bin/bash
 # Destroys cluster (idempotent operation).
 
+# Exit on first non-zero command return
+set -e
+
 ### Initialization stage
 
 # Config
-BASE_DIR=$(pwd)
+DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
+source $DIR/platform-config.sh
+BASE_DIR=$DIR/$PLATFORM
 
 ### Ansible stage
 cd $BASE_DIR/ansible

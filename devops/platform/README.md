@@ -1,12 +1,12 @@
-# CoreOS Launch
+# Platform Launch
 
-CoreOS Launch provisions and configures a cluster from scratch for use of
+Platform Launch provisions and configures a cluster from scratch for use of
 twitter analysis on OpenStack.
 
 ## Requirements
 
 Software:
-- Standard linux tools
+- Bash 4.3+
 - Ansible 1.9+
 - Terraform 0.5+
 - j2cli 0.3+
@@ -20,7 +20,9 @@ Prerequisites:
 - Expose DNSimple credentials as environment variables.
 
 To configure:
-- Adjust `./cluster-config.sh`
+- Adjust `./platform-config.sh` to the platform to be built.
+- Adjust `$PLATFORM/cluster-config.sh` where $PLATFORM is the desired platform
+  found in `./platform-config.sh`.
 
 To launch or update existing build (idempotent):
 - Run `./build-cluster.sh`.
