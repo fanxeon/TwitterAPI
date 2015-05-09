@@ -1,2 +1,2 @@
 # Platform config
-export PLATFORM=mesosphere
+export PLATFORM=chirp

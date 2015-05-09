@@ -1,0 +1,10 @@
+---
+- name: create ext4 filesystem on /dev/vdc
+  filesystem: fstype=ext4 dev="/dev/vdc"
+- name: mount persistent filesystem
+  mount: 
+    name: "{{ persist_mount }}"
+    src: "/dev/vdc"
+    opts: rw
+    fstype: ext4
+    state: mounted

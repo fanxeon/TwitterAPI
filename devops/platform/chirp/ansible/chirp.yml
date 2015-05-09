@@ -1,0 +1,25 @@
+---
+- name: configure chirp nodes
+  hosts: chirp
+  sudo: yes
+  roles:
+    - role: persist-vol
+    - role: ansible-couchdb-peruser
+      couchdb:
+        version: 1.6.1
+        src: "/home/couchdb/src/couchdb"
+        dest: "/home/couchdb/opt/couchdb"
+        database_dir: "{{ persist_mount }}/couchdb"
+        ini: "local.ini.j2"
+        repo: "git://github.com/apache/couchdb.git"
+        host: "0.0.0.0"
+        port: 5984
+        peruser_version: 1.0.1
+        peruser_src: "/home/couchdb/src/couchdb-1.0.1"
+        peruser_dst: "${couchdb.dest}/lib/couchdb/plugins/couchperuser"
+        peruser_repo: "git://github.com/etrepum/couchperuser.git"
+        rebar_version: 2.5.1
+        rebar_src: "/home/couchdb/src/rebar-2.5.1"
+        rebar_repo: "git://github.com/rebar/rebar.git"
+    - role: twitter-couchdb
+      peer_group: "chirp"
