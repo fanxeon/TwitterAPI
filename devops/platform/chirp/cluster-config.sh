@@ -21,6 +21,6 @@ export IMAGE_ID="eeedf697-5a41-4d91-a478-01bb21e32cbe"
 # Etcd master count
 export ETCD_MASTER_COUNT=3
 # Volume size for nodes
-export VOLUME_SIZE=30
+export VOLUME_SIZE=50
 # Ansible ssh host checking
 export ANSIBLE_HOST_KEY_CHECKING=False
