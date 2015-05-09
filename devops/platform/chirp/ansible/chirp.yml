@@ -3,7 +3,7 @@
   hosts: chirp
   sudo: yes
   roles:
-    - role: persist-vol
+    - role: chirp-persist-vol
     - role: ansible-couchdb-peruser
       couchdb:
         version: 1.6.1
@@ -21,5 +21,9 @@
         rebar_version: 2.5.1
         rebar_src: "/home/couchdb/src/rebar-2.5.1"
         rebar_repo: "git://github.com/rebar/rebar.git"
-    - role: twitter-couchdb
+    - role: chirp-couchdb
+      peer_group: "chirp"
+    - role: geerlingguy.apache
+      apache_listen_port: 8080
+    - role: chirp-haproxy
       peer_group: "chirp"
