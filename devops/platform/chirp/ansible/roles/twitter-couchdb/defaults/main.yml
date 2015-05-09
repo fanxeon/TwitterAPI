@@ -1,2 +1,2 @@
 ---
-persist_mount: "/mnt/per"
+peer_group: "couch"
