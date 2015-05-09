@@ -1,0 +1,10 @@
+peer_node_count = 3
+peer_name_prefix = "b-"
+availability_zone = "sa"
+keypair = "team19"
+flavor_id = "1"
+domain = "t19.ninja"
+subdomain = "chi"
+dns_ttl = 5
+image_id = "eeedf697-5a41-4d91-a478-01bb21e32cbe"
+volume_size = "50"
