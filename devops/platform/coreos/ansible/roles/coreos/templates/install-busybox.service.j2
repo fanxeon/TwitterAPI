@@ -1,0 +1,12 @@
+[Unit]
+After=network-online.target
+After=docker.service
+Description=Install BusyBox
+Documentation=http://zettio.github.io/weave/
+Requires=network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/docker pull busybox:latest

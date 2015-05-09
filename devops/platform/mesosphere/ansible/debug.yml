@@ -1,0 +1,10 @@
+---
+- hosts: [all]
+  sudo: True
+  tags: ['debug']
+  pre_tasks:
+    - name: conditionally include consul bootstrap
+      include_vars: consul-bootstrap-vars.yml
+      when: zoo_id == "1"
+    - name: debug woo!
+      debug: var=hostvars[inventory_hostname]

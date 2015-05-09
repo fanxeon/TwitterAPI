@@ -1,0 +1,11 @@
+---
+- name: bootstrap coreos hosts
+  hosts: coreos
+  gather_facts: False
+  roles:
+    - defunctzombie.coreos-bootstrap
+- name: configure coreos nodes
+  hosts: coreos
+  sudo: yes
+  roles:
+    - coreos

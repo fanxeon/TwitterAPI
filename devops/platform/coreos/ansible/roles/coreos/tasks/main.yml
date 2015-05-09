@@ -1,0 +1,41 @@
+---
+- name: ensure weave service installation
+  template:
+    src: install-weave.service.j2
+    dest: /etc/systemd/system/install-weave.service
+
+- name: ensure weave service
+  template:
+    src: weave.service.j2
+    dest: /etc/systemd/system/weave.service
+  notify:
+    - daemon-reload weave
+    - restart weave
+
+- name: ensure weave network configuration
+  template:
+    src: 10-weave.network.j2
+    dest: /etc/systemd/network/10-weave.network
+  notify:
+    - restart weave
+
+- name: ensure weave environment placement
+  template:
+    src: weave.env.j2
+    dest: /etc/weave.env
+  notify:
+    - restart weave
+
+- name: ensure busybox service installation
+  template:
+    src: install-busybox.service.j2
+    dest: /etc/systemd/system/install-busybox.service
+
+- name: ensure weave install service
+  service: name=install-weave state=started
+
+- name: ensure weave service
+  service: name=weave state=started enabled=true
+
+- name: ensure busybox install service
+  service: name=install-busybox state=started

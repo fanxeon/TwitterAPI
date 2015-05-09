@@ -1,0 +1,4 @@
+---
+- include: common.yml
+- include: mesos_primaries.yml
+- include: mesos_workers.yml

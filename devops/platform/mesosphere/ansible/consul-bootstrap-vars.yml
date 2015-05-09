@@ -1,0 +1,3 @@
+---
+# Variable to be conditionally included from group_vars.
+consul_bootstrap: true
