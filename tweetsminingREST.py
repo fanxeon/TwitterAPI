@@ -131,6 +131,8 @@ while tweetCount < maxTweets:
        #Users Loop
        for row in dbt.query(usernames, '_count', group=True):
          get_all_tweets(row.key)
+         mylogsfile = open(logsfile, 'a')
          mylogsfile.write('User Break %s.\n' % (datetime.datetime.now()))
+         mylogsfile.close()
          time.sleep(60 * 2) #300 calls limit per 15-min window
       time.sleep(60 * 60)
