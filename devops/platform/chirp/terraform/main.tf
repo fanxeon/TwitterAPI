@@ -65,6 +65,13 @@ resource "openstack_compute_secgroup_v2" "chirp" {
     ip_protocol = "tcp"
     cidr = "0.0.0.0/0"
   }
+  # Enable HTTP port to all
+  rule {
+    from_port = 80
+    to_port = 80
+    ip_protocol = "tcp"
+    cidr = "0.0.0.0/0"
+  }
   # Enable all ports to own group
   rule {
     from_port = 1
