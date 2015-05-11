@@ -28,27 +28,35 @@ frontend http
 
   default_backend www_backend
   acl www_flag hdr(host) -m beg www.
-  acl deb_flag hdr(host) -m beg deb.
   acl mon_flag hdr(host) -m beg mon.
 
+{% for app in apps %}
+  acl {{app.prefix}}_flag hdr(host) -m beg {{app.prefix}}.
+{% endfor %}
+
   use_backend www_backend if www_flag
-  use_backend deb_backend if deb_flag
   use_backend mon_backend if mon_flag
+
+{% for app in apps %}
+  use_backend {{app.prefix}}_backend if {{app.prefix}}_flag
+{% endfor %}
 
 backend www_backend
   balance leastconn
 {% for host in groups[peer_group] %}
   server {{host.split('.',1)[0]}} {{ host }}:8080 check
 {% endfor %}
-
-backend deb_backend
-  balance leastconn
-{% for host in groups[peer_group] %}
-  server {{host.split('.',1)[0]}} {{ host }}:7000 check
-{% endfor %}
-
 backend mon_backend
   balance leastconn
 {% for host in groups[peer_group] %}
   server {{host.split('.',1)[0]}} {{ host }}:3737 check
+{% endfor %}
+
+
+{% for app in apps %}
+backend {{app.prefix}}_backend
+  balance leastconn
+{% for host in groups[peer_group] %}
+  server {{host.split('.',1)[0]}} {{ host }}:{{app.port}} check
+{% endfor %}
 {% endfor %}

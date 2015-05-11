@@ -22,7 +22,6 @@
         rebar_src: "/home/couchdb/src/rebar-2.5.1"
         rebar_repo: "git://github.com/rebar/rebar.git"
     - role: chirp-couchdb
-      peer_group: "chirp"
     - role: geerlingguy.apache
       apache_listen_port: 8080
     - role: ANXS.monit
@@ -30,6 +29,4 @@
       monit_address: "0.0.0.0"
       monit_allow: ["0.0.0.0/0.0.0.0", "ninja:chichichi"]
     - role: chirp-haproxy
-      peer_group: "chirp"
     - role: chirp-apps
-      peer_group: "chirp"

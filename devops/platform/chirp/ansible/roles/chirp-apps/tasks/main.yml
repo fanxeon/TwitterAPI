@@ -17,15 +17,12 @@
 
 - name: install applications
   template: src={{item.file}} dest=/opt/deploy/{{item.file}}
-  with_items:
-    - { file: "debug-app.py"}
+  with_items: apps
   notify: restart apps
 - name: configure applications
   template: src=init.j2 dest=/etc/init.d/{{item.name}} mode=0755
-  with_items:
-    - { cmd: "python /opt/deploy/debug-app.py -t 0.0.0.0 -p 7000", name: "debug-app"}
+  with_items: apps
   notify: restart apps
 - name: establish app services
   service: name={{item.name}} state=started
-  with_items:
-    - { name: "debug-app"}
+  with_items: apps
