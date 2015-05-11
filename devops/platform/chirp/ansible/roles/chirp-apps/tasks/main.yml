@@ -23,6 +23,10 @@
   template: src=init.j2 dest=/etc/init.d/{{item.name}} mode=0755
   with_items: apps
   notify: restart apps
+- name: configure monit for application
+  template: src=monit.j2 dest=/etc/monit/conf.d/{{item.name}} mode=0644
+  with_items: apps
+  notify: reload monit
 - name: establish app services
   service: name={{item.name}} state=started
   with_items: apps
