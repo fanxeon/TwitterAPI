@@ -1,0 +1,32 @@
+---
+- name: install python dev
+  apt: name=python-dev
+- name: install pip
+  apt: name=python-pip
+- name: install flask
+  pip: name=flask
+- name: install flask-runner
+  pip: name=flask-runner
+- name: install netifaces
+  pip: name=netifaces
+
+- name: ensure deploy directory
+  file: path=/opt/deploy state=directory
+- name: ensure deploy cwd directory
+  file: path=/opt/deploy/cwd state=directory owner=ubuntu
+
+- name: install applications
+  template: src={{item.file}} dest=/opt/deploy/{{item.file}}
+  with_items: apps
+  notify: restart apps
+- name: configure applications
+  template: src=init.j2 dest=/etc/init.d/{{item.name}} mode=0755
+  with_items: apps
+  notify: restart apps
+- name: configure monit for application
+  template: src=monit.j2 dest=/etc/monit/conf.d/{{item.name}} mode=0644
+  with_items: apps
+  notify: reload monit
+- name: establish app services
+  service: name={{item.name}} state=started
+  with_items: apps

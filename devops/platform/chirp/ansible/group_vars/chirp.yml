@@ -1,3 +1,11 @@
 ---
 ansible_ssh_user: ubuntu
 node_id: "{{inventory_hostname_short.rsplit('-',1)[1]}}"
+persist_mount: "/mnt/per"
+peer_group: "chirp"
+apps:
+  - name: "debug-app"
+    file: "debug-app.py"
+    cmd: "python /opt/deploy/debug-app.py -t 0.0.0.0 -p 7000"
+    port: 7000
+    prefix: "deb"
