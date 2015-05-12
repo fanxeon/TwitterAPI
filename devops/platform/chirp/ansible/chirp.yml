@@ -30,3 +30,6 @@
       monit_allow: ["0.0.0.0/0.0.0.0", "ninja:chichichi"]
     - role: chirp-haproxy
     - role: chirp-apps
+    - role: ansible-elasticsearch
+    - role: logstash-role
+    - role: azavea.kibana

@@ -3,6 +3,25 @@ ansible_ssh_user: ubuntu
 node_id: "{{inventory_hostname_short.rsplit('-',1)[1]}}"
 persist_mount: "/mnt/per"
 peer_group: "chirp"
+elasticsearch_version: "1.5.2"
+elasticsearch_node_name: "elasticsearch-{{node_id}}"
+elasticsearch_cluster_name: "chirp.elasticsearch.cluster"
+elasticsearch_timezone: "Australia/Melbourne"
+elasticsearch_discovery_zen_ping_multicast_enabled: false
+elasticsearch_discovery_zen_ping_unicast_hosts: "{{groups['chirp']}}"
+logstash_version: "1.4.2"
+logstash_defaults:
+  - directive: "LS_USER=root"
+  - directive: 'LS_HEAP_SIZE="256m"'
+logstash_inputs:
+  couchdb_changes: ->
+    db => "twitter"
+logstash_outputs:
+  elasticsearch: ->
+    embedded => false
+    cluster => "{elasticsearch_cluster_name}"
+    node_name => "{elasticsearch_node_name}"
+kibana_version: "4.0.2"
 apps:
   - name: "debug-app"
     file: "debug-app.py"
