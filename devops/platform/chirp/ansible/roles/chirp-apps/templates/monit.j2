@@ -1,0 +1,3 @@
+check process {{ item.name }} with pidfile /var/run/{{ item.name }}.pid
+    start program = "/etc/init.d/{{ item.name }} start" with timeout 120 seconds
+    stop program  = "/etc/init.d/{{ item.name }} stop"
