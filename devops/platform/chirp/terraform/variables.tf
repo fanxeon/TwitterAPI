@@ -4,8 +4,11 @@ variable "peer_node_count" {
 variable "peer_name_prefix" {
   description = "Node name's prefix"
 }
-variable "availability_zone" {
-  description = "OpenStack availability zone"
+variable "ins_availability_zone" {
+  description = "OpenStack instance availability zone"
+}
+variable "vol_availability_zone" {
+  description = "OpenStack volume availability zone"
 }
 variable "keypair" {
   description = "OpenStack keypair"

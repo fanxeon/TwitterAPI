@@ -27,7 +27,7 @@ resource "dnsimple_record" "peer" {
 # Configure peer instances
 resource "openstack_compute_instance_v2" "peer" {
   name = "${var.peer_name_prefix}${count.index+1}"
-  availability_zone = "${var.availability_zone}"
+  availability_zone = "${var.ins_availability_zone}"
   image_id = "${var.image_id}"
   flavor_id = "${var.flavor_id}"
   key_pair = "${var.keypair}"
@@ -48,7 +48,7 @@ resource "openstack_compute_instance_v2" "peer" {
 resource "openstack_blockstorage_volume_v1" "vol" {
   name = "vol_${count.index+1}"
   description = "Volume"
-  availability_zone = "${var.availability_zone}"
+  availability_zone = "${var.vol_availability_zone}"
   size = "${var.volume_size}"
   count = "${var.peer_node_count}"
 }

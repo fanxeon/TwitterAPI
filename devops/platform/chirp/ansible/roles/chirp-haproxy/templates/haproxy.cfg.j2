@@ -44,12 +44,12 @@ frontend http
 backend www_backend
   balance leastconn
 {% for host in groups[peer_group] %}
-  server {{host.split('.',1)[0]}} {{ host }}:8080 check
+  server www-{{host.split('.',1)[0]}} {{ host }}:8080 check
 {% endfor %}
 backend mon_backend
   balance leastconn
 {% for host in groups[peer_group] %}
-  server {{host.split('.',1)[0]}} {{ host }}:3737 check
+  server mon-{{host.split('.',1)[0]}} {{ host }}:3737 check
 {% endfor %}
 
 
@@ -57,6 +57,6 @@ backend mon_backend
 backend {{app.prefix}}_backend
   balance leastconn
 {% for host in groups[peer_group] %}
-  server {{host.split('.',1)[0]}} {{ host }}:{{app.port}} check
+  server {{app.prefix}}-{{host.split('.',1)[0]}} {{ host }}:{{app.port}} check
 {% endfor %}
 {% endfor %}
