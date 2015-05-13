@@ -3,6 +3,52 @@ ansible_ssh_user: ubuntu
 node_id: "{{inventory_hostname_short.rsplit('-',1)[1]}}"
 persist_mount: "/mnt/per"
 peer_group: "chirp"
+chirp:
+  username: "ninja"
+  password: "chichichi"
+couchdb:
+  version: 1.6.1
+  src: "/home/couchdb/src/couchdb"
+  dest: "/home/couchdb/opt/couchdb"
+  database_dir: "{{ persist_mount }}/couchdb"
+  ini: "local.ini.j2"
+  repo: "git://github.com/apache/couchdb.git"
+  host: "0.0.0.0"
+  port: 5984
+  peruser_version: 1.0.1
+  peruser_src: "/home/couchdb/src/couchdb-1.0.1"
+  peruser_dst: "${couchdb.dest}/lib/couchdb/plugins/couchperuser"
+  peruser_repo: "git://github.com/etrepum/couchperuser.git"
+  rebar_version: 2.5.1
+  rebar_src: "/home/couchdb/src/rebar-2.5.1"
+  rebar_repo: "git://github.com/rebar/rebar.git"
+apache_listen_port: 8080
+apache_listen_port_ssl: 8443
+monit_port: 3737
+monit_address: "0.0.0.0"
+monit_allow: ["0.0.0.0/0.0.0.0"]
+elasticsearch_version: "1.5.2"
+elasticsearch_node_name: "elasticsearch-{{node_id}}"
+elasticsearch_cluster_name: "chirp.elasticsearch.cluster"
+elasticsearch_timezone: "Australia/Melbourne"
+elasticsearch_discovery_zen_ping_multicast_enabled: false
+elasticsearch_discovery_zen_ping_unicast_hosts: "{{groups['chirp']}}"
+elasticsearch_data_dir: "{{ persist_mount }}/elasticsearch"
+logstash_version: "1.4"
+logstash_defaults:
+  - directive: "LS_USER=root"
+  - directive: 'LS_HEAP_SIZE="256m"'
+logstash_inputs:
+  couchdb_changes: ->
+    db => "twitter"
+logstash_outputs:
+  elasticsearch: ->
+    embedded => false
+    cluster => "{elasticsearch_cluster_name}"
+    node_name => "{elasticsearch_node_name}"
+    index => "twitter-%{+YYYY.MM.dd}"
+    index_type => "tweet"
+kibana_version: "4.0.2"
 apps:
   - name: "debug-app"
     file: "debug-app.py"

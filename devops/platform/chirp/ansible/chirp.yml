@@ -5,28 +5,11 @@
   roles:
     - role: chirp-persist-vol
     - role: ansible-couchdb-peruser
-      couchdb:
-        version: 1.6.1
-        src: "/home/couchdb/src/couchdb"
-        dest: "/home/couchdb/opt/couchdb"
-        database_dir: "{{ persist_mount }}/couchdb"
-        ini: "local.ini.j2"
-        repo: "git://github.com/apache/couchdb.git"
-        host: "0.0.0.0"
-        port: 5984
-        peruser_version: 1.0.1
-        peruser_src: "/home/couchdb/src/couchdb-1.0.1"
-        peruser_dst: "${couchdb.dest}/lib/couchdb/plugins/couchperuser"
-        peruser_repo: "git://github.com/etrepum/couchperuser.git"
-        rebar_version: 2.5.1
-        rebar_src: "/home/couchdb/src/rebar-2.5.1"
-        rebar_repo: "git://github.com/rebar/rebar.git"
     - role: chirp-couchdb
     - role: geerlingguy.apache
-      apache_listen_port: 8080
     - role: ANXS.monit
-      monit_port: 3737
-      monit_address: "0.0.0.0"
-      monit_allow: ["0.0.0.0/0.0.0.0", "ninja:chichichi"]
     - role: chirp-haproxy
     - role: chirp-apps
+    - role: ansible-elasticsearch
+    - role: logstash-role
+    - role: azavea.kibana

@@ -15,6 +15,9 @@
 - name: ensure deploy cwd directory
   file: path=/opt/deploy/cwd state=directory owner=ubuntu
 
+- name: ensure environment variables
+  template: src=env.j2 dest=/etc/profile.d/app-env.sh
+
 - name: install applications
   template: src={{item.file}} dest=/opt/deploy/{{item.file}}
   with_items: apps

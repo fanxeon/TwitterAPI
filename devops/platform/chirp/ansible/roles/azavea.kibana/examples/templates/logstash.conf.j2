@@ -1,0 +1,14 @@
+input {
+  file { path => [ "/var/log/syslog" ] }
+}
+
+output {
+  stdout { codec => rubydebug }
+
+  elasticsearch {
+    embedded => false
+    host => "localhost"
+    protocol => "http"
+    cluster => "{{ elasticsearch_cluster_name }}"
+  }
+}

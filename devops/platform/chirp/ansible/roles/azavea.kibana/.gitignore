@@ -1,0 +1,6 @@
+.vagrant
+
+examples/roles/azavea.logstash
+examples/roles/azavea.java
+examples/roles/azavea.elasticsearch
+examples/roles/azavea.unzip
