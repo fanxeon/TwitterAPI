@@ -60,6 +60,17 @@ def get_all_tweets(screen_name):
             tweetDoc["_id"] = tweetDoc["id_str"]
             max_id = int(float(tweetDoc["_id"])) - 1
             print(tweetDoc["_id"])
+            #TextBlob sentiment analysis
+            tweetanalysis = TextBlob(tweetDoc["text"])
+            if tweetanalysis.sentiment.polarity < 0:
+               sentiment = "negative"
+            elif tweetanalysis.sentiment.polarity == 0:
+               sentiment = "neutral"
+            else:
+               sentiment = "positive"
+            mysentiment = {"polarity": tweetanalysis.sentiment.polarity,"subjectivity": tweetanalysis.sentiment.subjectivity,"sentiment": sentiment}
+            tweetDoc["analytics"] = mysentiment
+            
             dbdoc = dbu.save(tweetDoc)
             myno += 1
          except:
@@ -104,6 +115,16 @@ while tweetCount < maxTweets:
             if tweetDoc["place"] != "None":
                if tweetDoc["place"]["name"] == 'Boston':
                   print(tweetDoc["_id"], tweetDoc["place"]["name"])
+                  #TextBlob sentiment analysis
+                  tweetanalysis = TextBlob(tweetDoc["text"])
+                  if tweetanalysis.sentiment.polarity < 0:
+                     sentiment = "negative"
+                  elif tweetanalysis.sentiment.polarity == 0:
+                     sentiment = "neutral"
+                  else:
+                     sentiment = "positive"
+                  mysentiment = {"polarity": tweetanalysis.sentiment.polarity,"subjectivity": tweetanalysis.sentiment.subjectivity,"sentiment": sentiment}
+                  tweetDoc["analytics"] = mysentiment
                   dbdoc = dbt.save(tweetDoc)
          except:
             print(tweetDoc["_id"], "Duplication occured")
@@ -134,5 +155,5 @@ while tweetCount < maxTweets:
          mylogsfile = open(logsfile, 'a')
          mylogsfile.write('User Break %s.\n' % (datetime.datetime.now()))
          mylogsfile.close()
-         time.sleep(60 * 2) #300 calls limit per 15-min window
+         time.sleep(20) #300 calls limit per 15-min window
       time.sleep(60 * 60)
