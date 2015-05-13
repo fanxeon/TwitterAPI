@@ -3,6 +3,9 @@ ansible_ssh_user: ubuntu
 node_id: "{{inventory_hostname_short.rsplit('-',1)[1]}}"
 persist_mount: "/mnt/per"
 peer_group: "chirp"
+chirp:
+  username: "ninja"
+  password: "chichichi"
 couchdb:
   version: 1.6.1
   src: "/home/couchdb/src/couchdb"
@@ -23,7 +26,7 @@ apache_listen_port: 8080
 apache_listen_port_ssl: 8443
 monit_port: 3737
 monit_address: "0.0.0.0"
-monit_allow: ["0.0.0.0/0.0.0.0", "ninja:chichichi"]
+monit_allow: ["0.0.0.0/0.0.0.0"]
 elasticsearch_version: "1.5.2"
 elasticsearch_node_name: "elasticsearch-{{node_id}}"
 elasticsearch_cluster_name: "chirp.elasticsearch.cluster"

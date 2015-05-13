@@ -22,9 +22,15 @@ defaults
   errorfile 503 /etc/haproxy/errors/503.http
   errorfile 504 /etc/haproxy/errors/504.http
 
+userlist chirp_users
+  user {{ chirp.username }} insecure-password {{ chirp.password }}
+
 frontend http
   mode http
   bind *:80
+
+  acl auth_ok http_auth(chirp_users)
+  http-request auth if !auth_ok
 
   default_backend www_backend
   acl www_flag hdr(host) -m beg www.
