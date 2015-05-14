@@ -1,0 +1,11 @@
+---
+- name: configure monit for application
+  template: src=monit.j2 dest=/etc/monit/conf.d/{{item.name}} mode=0644
+  with_items: apps
+  notify: reload monit
+- name: configure monit for system services
+  template: src=monit.j2 dest=/etc/monit/conf.d/{{item.name}} mode=0644
+  with_items:
+    - { name: "haproxy" }
+    - { name: "elasticsearch" }
+  notify: reload monit

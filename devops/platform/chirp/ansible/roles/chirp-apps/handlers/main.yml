@@ -2,5 +2,3 @@
 - name: restart apps
   service: name={{item.name}} state=restarted
   with_items: apps
-- name: reload monit
-  service: name=monit state=reloaded
