@@ -5,21 +5,23 @@ import couchdb
 import datetime
 from textblob import TextBlob
 
-#Environment Variables
+##Environment Variables
+#Initial variables
 logsfile = 'tweetsmininglogsREST.txt'
 geoCodeCoordinates = '42.31,-71.05,300km'
 geoCityName = 'Boston'
+#Twitter credentials, keep private
+CONSUMER_KEY = 'VMAXFU1xfYWo8fXeCZlG8FlLq' 
+CONSUMER_SECRET = 'GBUtcNEGtxY8qTkd6jErKI70PBAdIDdUyWZwXg1H6QE7KtbKV4'
+ACCESS_TOKEN = '3180647443-XiL3H0Yxt3qPq7J2HgyzQGLsBhK7CWAnj3etVgW'
+ACCESS_TOKEN_SECRET = 'uD1J2MH7RvQ4MRLrYDlSAc999wHnI8jsPmeK5WHBLG0ky'
 
 #Opening output file then printing time log
 mylogsfile = open(logsfile, 'a')
 mylogsfile.write('Job started on %s.\n' % (datetime.datetime.now()))
 mylogsfile.close()
 
-#Twitter credentials, keep private
-CONSUMER_KEY = 'VMAXFU1xfYWo8fXeCZlG8FlLq' 
-CONSUMER_SECRET = 'GBUtcNEGtxY8qTkd6jErKI70PBAdIDdUyWZwXg1H6QE7KtbKV4'
-ACCESS_TOKEN = '3180647443-XiL3H0Yxt3qPq7J2HgyzQGLsBhK7CWAnj3etVgW'
-ACCESS_TOKEN_SECRET = 'uD1J2MH7RvQ4MRLrYDlSAc999wHnI8jsPmeK5WHBLG0ky'
+
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
