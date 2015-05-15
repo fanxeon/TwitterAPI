@@ -35,6 +35,7 @@ frontend http
   default_backend www_backend
   acl www_flag hdr(host) -m beg www.
   acl mon_flag hdr(host) -m beg mon.
+  acl kib_flag hdr(host) -m beg kib.
 
 {% for app in apps %}
   acl {{app.prefix}}_flag hdr(host) -m beg {{app.prefix}}.
@@ -42,6 +43,7 @@ frontend http
 
   use_backend www_backend if www_flag
   use_backend mon_backend if mon_flag
+  use_backend kib_backend if kib_flag
 
 {% for app in apps %}
   use_backend {{app.prefix}}_backend if {{app.prefix}}_flag
@@ -56,6 +58,15 @@ backend mon_backend
   balance leastconn
 {% for host in groups[peer_group] %}
   server mon-{{host.split('.',1)[0]}} {{ host }}:3737 check
+{% endfor %}
+backend kib_backend
+  balance roundrobin
+{% for host in groups[peer_group] %}
+{% if loop.first %}
+  server kib-{{host.split('.',1)[0]}} {{ host }}:5601 check
+{% else %}
+  server kib-{{host.split('.',1)[0]}} {{ host }}:5601 check backup
+{% endif %}
 {% endfor %}
 
 

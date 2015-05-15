@@ -1,9 +1,9 @@
 ### Cluster configuration
 
 # Openstack instance availablity zone
-export INS_AVAILABILITY_ZONE="sa"
+export INS_AVAILABILITY_ZONE="melbourne-qh2-uom"
 # Openstack volume availablity zone
-export VOL_AVAILABILITY_ZONE="sa"
+export VOL_AVAILABILITY_ZONE="melbourne-qh2"
 # Openstack instance flavor id
 export FLAVOR_ID="1"
 # Openstack keypair

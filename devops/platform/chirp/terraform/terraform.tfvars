@@ -1,7 +1,7 @@
 peer_node_count = 3
 peer_name_prefix = "b-"
-ins_availability_zone = "sa"
-vol_availability_zone = "sa"
+ins_availability_zone = "melbourne-qh2-uom"
+vol_availability_zone = "melbourne-qh2"
 keypair = "team19"
 flavor_id = "1"
 domain = "t19.ninja"
