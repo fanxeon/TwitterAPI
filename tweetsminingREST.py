@@ -8,6 +8,7 @@ from textblob import TextBlob
 #logs
 logsfile = 'tweetsmininglogsREST.txt'
 geoCodeCoordinates = '42.31,-71.05,300km'
+geoCityName = 'Boston'
 
 #Opening output file then printing time log
 mylogsfile = open(logsfile, 'a')
@@ -107,7 +108,7 @@ def get_location_tweets(geoCodeCoordinates):
             max_id = int(float(tweetDoc["_id"])) - 1
 #            print(tweetDoc["place"])
 #            if tweetDoc["place"] != "None":
-            if tweetDoc["place"]["name"] == 'Boston':
+            if tweetDoc["place"]["name"] == geoCityName:
                print(tweetDoc["_id"], tweetDoc["place"]["name"])
                mysentiment = analyse_text(tweetDoc["text"])
                tweetDoc["analytics"] = mysentiment
