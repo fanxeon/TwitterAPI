@@ -1,11 +1,9 @@
+#!/usr/bin/python
 import web
 import time
 import tweepy
 import json
 import couchdb
-import datetime
-from datetime import datetime
-from couchdb.mapping import Document, TextField, IntegerField, DateTimeField
 
 # Templates
 render = web.template.render('templates/')
@@ -13,11 +11,17 @@ render = web.template.render('templates/')
 # Url configure
 urls = (
         "/","index",
-        #Twitter related function
+        # Twitter related function
         "/twitter", "index",
         "/twitter/(.*)", "getTwitter",
-        "/all/(.*)","getAll",
-        #User related function
+        "/get_twitter/(.*)", "getTwitter",
+        "/all/","getAll",
+        # Sentiment related
+        "/sentiment/", "developing",
+        "/sentiment/negative", "getNegativeTweet",
+        "/sentiment/positive", "getPositiveTweet",
+        "/sentiment/netural", "getNeturalTweet",
+        # User related function
         "/user" , "index",
         "/user/(.*)" , "user"
         )
@@ -26,6 +30,11 @@ urls = (
 couch = couchdb.Server()
 db = couch['twitter']
 usrDb = couch['twitter_users']
+
+# Constant number
+
+startIdx = 0
+endIdx = 0
 
 # Map function
 def fun(doc):
@@ -41,11 +50,6 @@ usernames = '''function(doc) {
     emit(doc.user.screen_name, null);
     }
     }'''
-
-class Tweet (Document) :
-    name = TextField()
-    text = TextField()
-    id_id = TextField()
 
 
 # Main classes
@@ -70,13 +74,40 @@ class Twitter:
     def GET(self):
         return None
 
-# Overview
+# Get ALL twitter list
 class getAll:
     def GET(self):
-        for row in db.query(map_fun):
-            counter = counter + 1
-            if counter < 10 : # test for display 10 results
-                print(row.key)
+        counter = 0
+        list = []
+        db = couch['twitter2']
+        for row in db.view('_all_docs'):
+            if counter == 10 :
+                break
+            else :
+                list.append(row)
+                counter += 1
+        return render.all(db)
+    
+    def POST(self):
+        return None
+
+# Sentiment related search
+class getNegativeTweet:
+    def GET(self):
+        return None
+
+class getPositiveTweet:
+    def GET(self):
+        return None
+
+class getNeturalTweet:
+    def GET(self):
+        return None
+
+# develop page
+class developing:
+    def GET(self):
+        return render.developing()
 
 # User related
 class getUser:
@@ -88,7 +119,7 @@ def get_tweets(self):
     return self.db.view('twitter/get_tweets')
 
 
-# Views
+# Views - Developing
 def _create_views(self):
     count_map = 'function(doc) { emit(doc.id, 1); }'
     count_reduce = 'function(keys, values) { return sum(values); }'
@@ -107,9 +138,6 @@ def save_tweet(self, tw):
 def count_tweets(self):
     for doc in self.db.view('twitter/count_tweets'):
         return doc.value
-
-def get_tweets(self):
-    return self.db.view('twitter/get_tweets')
 
 
 
