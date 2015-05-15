@@ -5,7 +5,7 @@ import couchdb
 import datetime
 from textblob import TextBlob
 
-#logs
+#Environment Variables
 logsfile = 'tweetsmininglogsREST.txt'
 geoCodeCoordinates = '42.31,-71.05,300km'
 geoCityName = 'Boston'
