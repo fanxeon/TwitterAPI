@@ -74,12 +74,12 @@ class Twitter:
     def GET(self):
         return None
 
-# Get ALL twitter list
+# Get ALL twitter list  - Will be replaced by view
 class getAll:
     def GET(self):
         counter = 0
         list = []
-        db = couch['twitter2']
+        db = couch['twitter2']  # Temp used smaller database
         for row in db.view('_all_docs'):
             if counter == 10 :
                 break
@@ -91,7 +91,7 @@ class getAll:
     def POST(self):
         return None
 
-# Sentiment related search
+# Sentiment related search - Developing
 class getNegativeTweet:
     def GET(self):
         return None
@@ -119,7 +119,7 @@ def get_tweets(self):
     return self.db.view('twitter/get_tweets')
 
 
-# Views - Developing
+# Views - Developing - Not used
 def _create_views(self):
     count_map = 'function(doc) { emit(doc.id, 1); }'
     count_reduce = 'function(keys, values) { return sum(values); }'
