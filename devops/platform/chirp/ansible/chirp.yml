@@ -3,14 +3,14 @@
   hosts: chirp
   sudo: yes
   roles:
-    # - role: chirp-persist-vol
-    # - role: ansible-couchdb-peruser
-    # - role: chirp-couchdb
-    # - role: geerlingguy.apache
-    # - role: ANXS.monit
-    # - role: ansible-elasticsearch
-    # - role: logstash-role
-    # - role: azavea.kibana
+    - role: chirp-persist-vol
+    - role: ansible-couchdb-peruser
+    - role: chirp-couchdb
+    - role: geerlingguy.apache
+    - role: ANXS.monit
+    - role: ansible-elasticsearch
+    - role: logstash-role
+    - role: azavea.kibana
     - role: chirp-apps
     - role: chirp-haproxy
     - role: chirp-monit
