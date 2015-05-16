@@ -27,7 +27,7 @@ apache_listen_port_ssl: 8443
 monit_port: 3737
 monit_address: "0.0.0.0"
 monit_allow: ["0.0.0.0/0.0.0.0"]
-elasticsearch_version: "1.5.2"
+elasticsearch_version: "1.5.1"
 elasticsearch_node_name: "elasticsearch-{{node_id}}"
 elasticsearch_cluster_name: "chirp.elasticsearch.cluster"
 elasticsearch_timezone: "Australia/Melbourne"
@@ -54,6 +54,7 @@ logstash_outputs:
     cluster => "{{ elasticsearch_cluster_name }}"
     node_name => "logstash-{{ elasticsearch_node_name }}"
     index => "logstash-%{+YYYY.MM.dd}"
+    # document_id => "%{fingerprint}"
     action => "%{[@metadata][action]}"
     document_id => "%{[@metadata][_id]}"
 kibana_version: "4.0.2"
