@@ -42,10 +42,6 @@ apply_template $TEMPLATE_DIR/terraform.tfvars.j2 > terraform.tfvars
 # Provision/update cluster
 terraform apply
 
-# Sleep to let DNS records expire in non-honourable DNS servers
-echo "Sleeping to let DNS records fully expire"
-sleep 15
-
 ### Ansible stage
 cd $BASE_DIR/ansible
 

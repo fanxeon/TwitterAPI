@@ -13,6 +13,9 @@ dir="/opt/deploy/cwd"
 user="ubuntu"
 cmd="{{ item.cmd }}"
 
+# Source env variables
+. /etc/profile.d/app-env.sh
+
 name=`basename $0`
 pid_file="/var/run/$name.pid"
 stdout_log="/var/log/$name.log"
@@ -43,7 +46,7 @@ case "$1" in
     else
         echo "Starting $name"
         cd "$dir"
-        sudo -u "$user" $cmd >> "$stdout_log" 2>> "$stderr_log" &
+        sudo -E -u "$user" $cmd >> "$stdout_log" 2>> "$stderr_log" &
         echo $! > "$pid_file"
         if ! is_running; then
             echo "Unable to start, see $stdout_log and $stderr_log"
