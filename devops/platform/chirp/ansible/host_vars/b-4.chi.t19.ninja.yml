@@ -4,3 +4,4 @@ twitter:
   consumer_secret: "Cn5suk7F7bBKQyugzwvnzlsvnpfwNG7udioc9FZoc"
   access_token: "1462235833-uIS1Wd4NdFOn8H5YmarfS9K400WMBU6uI4rszS0"
   access_token_secret: "g7bQjeiUwoF6B5hlWluTsHO2wv1CYoDgFsaTPwu8l1w"
+  harvest_mode: "USERS"

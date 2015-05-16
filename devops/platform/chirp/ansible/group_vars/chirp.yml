@@ -63,3 +63,9 @@ apps:
     cmd: "python /opt/deploy/debug-app.py -t 0.0.0.0 -p 7000"
     port: 7000
     prefix: "deb"
+apps:
+  - name: "twitter-sampler"
+    file: "twitter-machine-sampler.py"
+    cmd: "python /opt/deploy/twitter-machine-sampler.py"
+    port: 9999
+    prefix: "har"

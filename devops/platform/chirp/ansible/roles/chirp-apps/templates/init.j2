@@ -13,6 +13,9 @@ dir="/opt/deploy/cwd"
 user="ubuntu"
 cmd="{{ item.cmd }}"
 
+# Source env variables
+. /etc/profile.d/app-env.sh
+
 name=`basename $0`
 pid_file="/var/run/$name.pid"
 stdout_log="/var/log/$name.log"

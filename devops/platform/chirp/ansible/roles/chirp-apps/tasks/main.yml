@@ -1,14 +1,24 @@
 ---
 - name: install python dev
   apt: name=python-dev
+- name: install python setup tools
+  apt: name=python-setuptools
 - name: install pip
-  apt: name=python-pip
+  easy_install: name=pip
+- name: install requests
+  pip: name=requests
 - name: install flask
   pip: name=flask
 - name: install flask-runner
   pip: name=flask-runner
 - name: install netifaces
   pip: name=netifaces
+- name: install tweepy
+  pip: name=tweepy
+- name: install couchdb
+  pip: name=couchdb
+- name: install textblob
+  pip: name=textblob
 
 - name: ensure deploy directory
   file: path=/opt/deploy state=directory
