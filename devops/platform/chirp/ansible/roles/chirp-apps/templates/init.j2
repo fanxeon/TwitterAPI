@@ -9,7 +9,7 @@
 # Description:       Enable service provided by daemon.
 ### END INIT INFO
 
-dir="/opt/deploy/cwd"
+dir="{{ item.cwd }}"
 user="ubuntu"
 cmd="{{ item.cmd }}"
 

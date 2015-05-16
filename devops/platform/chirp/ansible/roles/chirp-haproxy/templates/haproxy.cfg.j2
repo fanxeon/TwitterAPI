@@ -32,9 +32,9 @@ frontend http
   acl auth_ok http_auth(chirp_users)
   http-request auth if !auth_ok
 
-  default_backend www_backend
   acl www_flag hdr(host) -m beg www.
   acl mon_flag hdr(host) -m beg mon.
+  acl ela_flag hdr(host) -m beg ela.
   acl kib_flag hdr(host) -m beg kib.
 
 {% for app in apps %}
@@ -43,6 +43,7 @@ frontend http
 
   use_backend www_backend if www_flag
   use_backend mon_backend if mon_flag
+  use_backend ela_backend if ela_flag
   use_backend kib_backend if kib_flag
 
 {% for app in apps %}
@@ -58,6 +59,11 @@ backend mon_backend
   balance leastconn
 {% for host in groups[peer_group] %}
   server mon-{{host.split('.',1)[0]}} {{ host }}:3737 check
+{% endfor %}
+backend ela_backend
+  balance leastconn
+{% for host in groups[peer_group] %}
+  server ela-{{host.split('.',1)[0]}} {{ host }}:9200 check
 {% endfor %}
 backend kib_backend
   balance roundrobin

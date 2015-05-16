@@ -59,13 +59,17 @@ logstash_outputs:
 kibana_version: "4.0.2"
 apps:
   - name: "debug-app"
-    file: "debug-app.py"
     cmd: "python /opt/deploy/debug-app.py -t 0.0.0.0 -p 7000"
+    cwd: "/opt/deploy/cwd"
     port: 7000
     prefix: "deb"
-apps:
   - name: "twitter-sampler"
-    file: "twitter-machine-sampler.py"
     cmd: "python /opt/deploy/twitter-machine-sampler.py"
-    port: 9999
+    cwd: "/opt/deploy/cwd"
+    port: 9999 # Fake number, as sampler does not have a web monitor yet.
     prefix: "har"
+  - name: "web-service" 
+    cmd: "python /opt/deploy/web-svc/webservice.py 3030"
+    cwd: "/opt/deploy/web-svc"
+    port: 3030
+    prefix: "svc"

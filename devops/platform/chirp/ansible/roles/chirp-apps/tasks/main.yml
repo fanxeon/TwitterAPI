@@ -19,6 +19,8 @@
   pip: name=couchdb
 - name: install textblob
   pip: name=textblob
+- name: install web
+  pip: name=web.py
 
 - name: ensure deploy directory
   file: path=/opt/deploy state=directory
@@ -29,8 +31,7 @@
   template: src=env.j2 dest=/etc/profile.d/app-env.sh
 
 - name: install applications
-  template: src={{item.file}} dest=/opt/deploy/{{item.file}}
-  with_items: apps
+  synchronize: src=../templates/ dest=/opt/deploy/
   notify: restart apps
 - name: configure applications
   template: src=init.j2 dest=/etc/init.d/{{item.name}} mode=0755
