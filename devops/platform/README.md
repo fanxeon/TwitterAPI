@@ -1,7 +1,7 @@
 # Platform Launch
 
-Platform Launch provisions and configures a cluster from scratch for use of
-twitter analysis on OpenStack.
+Platform Launch provisions and configures a cluster from scratch with
+provisoning for the infrastructure, system and application level.
 
 ## Requirements
 
