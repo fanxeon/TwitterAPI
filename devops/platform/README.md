@@ -1,7 +1,8 @@
 # Platform Launch
 
 Platform Launch provisions and configures a cluster from scratch with
-provisoning for the infrastructure, system and application level.
+provisoning for the infrastructure (Terraform), system and application
+level (Ansible).
 
 ## Requirements
 
