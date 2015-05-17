@@ -2,12 +2,15 @@
 - name: configure chirp nodes
   hosts: chirp
   sudo: yes
+  pre_tasks:
+    - name: update apt cache
+      apt: update_cache=yes
   roles:
-    # - role: chirp-persist-vol
-    # - role: ansible-couchdb-peruser
-    # - role: chirp-couchdb
-    # - role: geerlingguy.apache
-    # - role: ANXS.monit
+    - role: chirp-persist-vol
+    - role: ansible-couchdb-peruser
+    - role: chirp-couchdb
+    - role: geerlingguy.apache
+    - role: ANXS.monit
     # - role: ansible-elasticsearch
     # - role: logstash-role
     # - role: azavea.kibana

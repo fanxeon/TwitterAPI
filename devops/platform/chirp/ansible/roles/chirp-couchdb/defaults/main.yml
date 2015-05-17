@@ -1,4 +1,4 @@
 ---
 peer_group: "couch"
 # NOTE: This is currently NOT used due to parsing issues in Ansible 1.9.2.
-# default_design_doc: "{{ lookup('file', '../templates/default-design-doc.json') }}"
+default_design_doc: "{{ lookup('file', '../templates/default-design-doc.json') }}"
