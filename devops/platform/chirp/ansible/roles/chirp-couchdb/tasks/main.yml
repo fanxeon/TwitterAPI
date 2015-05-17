@@ -6,11 +6,14 @@
     url=http://localhost:5984/twitter
     method=PUT
     status_code=200,201,202,412
+# NOTE: Using CURL as a workaround as Ansible 1.9.1 has problems uploading data
+- name: create twitter default design document
+  shell: 'curl -XPUT http://localhost:5984/twitter/_design/default -d @../templates/default-design-doc.json'
 - name: handle twitter replication
   uri: 
     url=http://localhost:5984/_replicate
     method=POST
-    body='{"source":"twitter","target":"http://{{ item }}:5984/twitter","continuous":true}'
+    body='{"target":"twitter","source":"http://{{ item }}:5984/twitter","continuous":true}'
     HEADER_Content-Type="application/json"
     status_code=200,201,202,412
   with_items: "{{ groups[peer_group] | difference([inventory_hostname]) }}"
