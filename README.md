@@ -16,6 +16,7 @@ For cloud and cluster computing By Team 19
 - 5/5/2015  : Web service established
 - 10/5/2015 : Analysis part added
 - 15/5/2015 : Lots of functions updated
+- 
 *Upstart jobs created on Ubuntu vm that will make sure these instances are always up and running./etc/init/twitter1.conf*
 ------------------------------------------------------------------------------------------------------------------
 ### Twitter Harvest
