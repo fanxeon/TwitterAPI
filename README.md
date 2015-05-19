@@ -4,7 +4,7 @@ For cloud and cluster computing By Team 19
 -----------------------------------------------------------------------------------------------------------------
 ### Root
 - */cloudsent/*           Main analysis part files , folder *analysis* is not using anymore
-- */web-svc/*             web service testing codes
+- */web-svc/*             web service testing codes , not using in running server
 - */devops/*              Hostfile manage nodes
 - */example-s3/*          Example of configuration
 - */twitter-harvesters/*  The application harvesting codes into couch db
@@ -30,6 +30,26 @@ For cloud and cluster computing By Team 19
 
 ### Remote configuration
 /devops/platform/
-##### Requirement software:
+##### Prerequisites:
+- Bash 4.3+
+- Ansible 1.9+
+- Terraform 0.5+
+- j2cli 0.3+
+- Ensure the SSH keypair assigned to the cluster is available via ssh-agent.
+  This is required for Ansible.
+- Expose OpenStack credentials as environment variables.
+- Expose DNSimple credentials as environment variables.
+
+To configure:
+- Adjust `./platform-config.sh` to the platform to be built.
+- Adjust `$PLATFORM/cluster-config.sh` where `$PLATFORM` is the desired platform
+  found in `./platform-config.sh`.
+
+To launch or update existing build (idempotent):
+- Run `./build-cluster.sh`.
+
+To remove:
+- Run `./destroy-cluster.sh`.
+
 
 
