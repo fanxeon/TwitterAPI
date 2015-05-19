@@ -20,7 +20,7 @@ For cloud and cluster computing By Team 19
 ------------------------------------------------------------------------------------------------------------------
 ### Twitter Harvest ###
 /twitter-harvesters/
-- Prerequisites:
+##### Prerequisites:
   - tweepy, couchdb, textblob
 - **TweetMining.py** - Main harvest app for loading data into Couch database 'twitter'(lighter db) and 'twitter_user'(full data volume db )applies in 4 instances with 8GB RAM, 2 Virtual CPU, 10 GB                   disk and 60GB Ephemeral Disk
   - **mylogsfile** : record logs in file for monitering status
@@ -40,15 +40,15 @@ For cloud and cluster computing By Team 19
 - Expose OpenStack credentials as environment variables.
 - Expose DNSimple credentials as environment variables.
 
-To configure:
+#####To configure:
 - Adjust `./platform-config.sh` to the platform to be built.
 - Adjust `$PLATFORM/cluster-config.sh` where `$PLATFORM` is the desired platform
   found in `./platform-config.sh`.
 
-To launch or update existing build (idempotent):
+#####To launch or update existing build (idempotent):
 - Run `./build-cluster.sh`.
 
-To remove:
+#####To remove:
 - Run `./destroy-cluster.sh`.
 
 
