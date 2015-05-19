@@ -19,7 +19,6 @@ For cloud and cluster computing By Team 19
 
 ------------------------------------------------------------------------------------------------------------------
 Upstart jobs created on Ubuntu vm that will make sure these instances are always up and running.
-ex. /etc/init/twitter1.conf
 ------------------------------------------------------------------------------------------------------------------
 ### Twitter Harvest
 /twitter-harvesters/
