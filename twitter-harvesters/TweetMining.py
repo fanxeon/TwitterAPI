@@ -9,7 +9,7 @@ from textblob import TextBlob
 ##Environment Variables
 #Initial variables
 HARVEST_MODE = os.environ['HARVEST_MODE']   # Harvest mode: ('CITY', 'USERS')
-logsfile = 'tweetsmininglogsREST.txt'
+logsfile = 'TweetMining.txt'
 geoCodeCoordinates = '42.31,-71.05,300km'
 geoCityName = 'Boston'
 #Twitter credentials, keep private
@@ -24,7 +24,7 @@ mylogsfile.write('Job started on %s.\n' % (datetime.datetime.now()))
 mylogsfile.close()
 
 
-
+#Twitter API Authentication
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, parser=tweepy.parsers.JSONParser())
@@ -121,12 +121,28 @@ while True:
 
 #Harvest Users
    elif HARVEST_MODE == 'USERS':
-    for row in dbt.view('_design/tweeters/_view/usernames', group=True):
+       #create the users view
+    try:
+       myusernames = '''function(doc) {
+          if (doc.user) {
+             emit(doc.user.screen_name, 1);
+          }
+       }'''
+       myreduce ="_count"
+       design = { 'views': {
+             'usernames': {
+                'map': myusernames,
+		'reduce': myreduce
+              }
+        } }
+
+       dbt["_design/tweeters"] = design
+    except:
+       pass
+    myusers = dbt.view('_design/tweeters/_view/usernames', group=True)
+    random.shuffle(myusers.rows)  #randomize the users
+    for row in myusers:
       get_user_tweets(row.key)
-      mylogsfile = open(logsfile, 'a')
-      mylogsfile.write(row.key)
-      mylogsfile.write('User Break %s.\n' % (datetime.datetime.now()))
-      mylogsfile.close()
       time.sleep(20) #300 calls limit per 15-min window
    else:
         raise Exception('Invalid HARVEST_MODE {}'.format(HARVEST_MODE))
