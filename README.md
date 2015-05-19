@@ -1,7 +1,7 @@
 # Boston twitter harvest and analysis
 For cloud and cluster computing By Team 19
 
---------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 # Root
 - /cloudsent/           Main analysis part files
 - /web-svc/             web service testing codes
@@ -17,7 +17,17 @@ For cloud and cluster computing By Team 19
 - 10/5/2015 : Analysis part added
 - 15/5/2015 : Lots of functions updated
 
----------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
 Upstart jobs created on Ubuntu vm that will make sure these instances are always up and running.
 ex. /etc/init/twitter1.conf
+------------------------------------------------------------------------------------------------------------------
+# Twitter Harvest
+/twitter-harvesters/
+TweetMining.py - Main harvest app for loading data into Couch database 'twitter'(lighter db) and 'twitter_user'(full data volume db )applies in 4 instances with 8GB RAM, 2 Virtual CPU, 10 GB                   disk and 60GB Ephemeral Disk
+- mylogsfile : record logs in file for monitering status
+- Twitter API Authentication : We used 4 access tokens to harvest in the same time in different machines
+- Analyse_text : Use TextBlob to analysis specific tweet is negative or positive depends on polarity and store into field sentiment at couchdb
+- get_location_tweets : we use geographic coordinates which is Boston acutally located
+
+
 
