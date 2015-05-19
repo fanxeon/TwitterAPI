@@ -18,7 +18,6 @@ For cloud and cluster computing By Team 19
 - 15/5/2015 : Lots of functions updated
 
 ------------------------------------------------------------------------------------------------------------------
-Upstart jobs created on Ubuntu vm that will make sure these instances are always up and running.
 ------------------------------------------------------------------------------------------------------------------
 ### Twitter Harvest
 /twitter-harvesters/
