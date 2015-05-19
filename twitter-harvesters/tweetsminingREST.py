@@ -1,12 +1,14 @@
 import time
 import tweepy
 import json
+import os
 import couchdb
 import datetime
 from textblob import TextBlob
 
 ##Environment Variables
 #Initial variables
+HARVEST_MODE = os.environ['HARVEST_MODE']   # Harvest mode: ('CITY', 'USERS')
 logsfile = 'tweetsmininglogsREST.txt'
 geoCodeCoordinates = '42.31,-71.05,300km'
 geoCityName = 'Boston'
@@ -39,6 +41,7 @@ try:
 except:
     dbu = server['twitter_users']
 
+#TextBlob function to calculate sentiments
 def analyse_text(tweet_text):
    tweetanalysis = TextBlob(tweet_text)
    if tweetanalysis.sentiment.polarity < 0:
@@ -54,32 +57,22 @@ def get_user_tweets(screen_name):
    myno = 0
    max_id = 0
    new_tweets = [0],[1]
-   print(new_tweets)
    try:
     while len(new_tweets) > 0:
       if (max_id <= 0):
          new_tweets = api.user_timeline(screen_name = screen_name,count=tweetsPerQry)
       else:
           new_tweets = api.user_timeline(screen_name = screen_name,count=tweetsPerQry, max_id=str(max_id))
-      #print(new_tweets[0])
       for tweetDoc in new_tweets:
-#       print(tweetDoc['place'])
             tweetDoc["_id"] = tweetDoc["id_str"]
             max_id = int(float(tweetDoc["_id"])) - 1
-            print(tweetDoc["_id"])
             mysentiment = analyse_text(tweetDoc["text"])
             tweetDoc["analytics"] = mysentiment
             dbdoc = dbu.save(tweetDoc)
             myno += 1
-      return
+      return    #Goes 100 back but can remove to get more!
    except:
-      return
-   mylogsfile = open(logsfile, 'a')
-   mylogsfile.write('max_id: ' + str(max_id) + '\n')
-   mylogsfile.write('tweetCount: ' + str(tweetCount) + '\n')
-   mylogsfile.write('Step %s.\n' % (datetime.datetime.now()))
-   mylogsfile.write('Found: ' + str(myno) + '\n')
-   mylogsfile.close()
+      pass  #pass duplication occurence
 
 docs = '''function(doc) {
         emit(doc._id, 1);
@@ -101,56 +94,39 @@ def get_location_tweets(geoCodeCoordinates):
       if (max_id <= 0):
          new_tweets = api.search(geocode=geoCodeCoordinates, count=tweetsPerQry)
       else:
-         print('Here:', max_id)
          new_tweets = api.search(geocode=geoCodeCoordinates, count=tweetsPerQry, max_id=str(max_id))
-      if len(new_tweets["statuses"]) > 0:
+      if len(new_tweets["statuses"]) > 0: #Stops when no more old tweets
        for tweetDoc in new_tweets["statuses"]:
          try:
-            tweetDoc["_id"] = tweetDoc["id_str"]
+            tweetDoc["_id"] = tweetDoc["id_str"]  #handling duplication by using id_str of tweet
             max_id = int(float(tweetDoc["_id"])) - 1
-#            print(tweetDoc["place"])
-#            if tweetDoc["place"] != "None":
             if tweetDoc["place"]["name"] == geoCityName:
-               print(tweetDoc["_id"], tweetDoc["place"]["name"])
                mysentiment = analyse_text(tweetDoc["text"])
-               tweetDoc["analytics"] = mysentiment
-
+               tweetDoc["analytics"] = mysentiment  #Add analytics to tweet json
                dbdoc = dbt.save(tweetDoc)
                myno +=1
          except Exception as e:
-            if str(e) == "('conflict', 'Document update conflict.')":
-               print(tweetDoc["_id"], "Duplication occured")
-               return
-            else:
-               pass
-
-       mylogsfile = open(logsfile, 'a')
-       mylogsfile.write('Geo max_id: ' + str(max_id) + '\n')
-       mylogsfile.write('Geo tweetCount: ' + str(tweetCount) + '\n')
-       mylogsfile.write('Geo Step %s.\n' % (datetime.datetime.now()))
-       mylogsfile.write('Geo Found: ' + str(myno) + '\n')
-       mylogsfile.close()
+               pass  #pass duplication occurence
 
        tweetCount += tweetsPerQry
        if tweetCount == maxTweets:
-         mylogsfile = open(logsfile, 'a')
-         mylogsfile.write('Geo max_id: ' + str(max_id) + '\n')
-         mylogsfile.write('Geo tweetCount: ' + str(tweetCount) + '\n')
-         mylogsfile.write('Geo Break %s.\n' % (datetime.datetime.now()))
-         mylogsfile.write('Geo Found: ' + str(myno) + '\n')
-         mylogsfile.close()
-         maxTweets +=maxTweets
+         maxTweets +=maxTweets #Loop again
          time.sleep(60 * 15) #450 calls limit per 15-min window 
 
 while True:
-   get_location_tweets(geoCodeCoordinates)
+    
+# Harvest City
+   if HARVEST_MODE == 'CITY':
+        get_location_tweets(geoCodeCoordinates)
 
-#Users Loop
-   for row in dbt.view('_design/tweeters/_view/usernames', group=True):
+#Harvest Users
+   elif HARVEST_MODE == 'USERS':
+    for row in dbt.view('_design/tweeters/_view/usernames', group=True):
       get_user_tweets(row.key)
       mylogsfile = open(logsfile, 'a')
       mylogsfile.write(row.key)
       mylogsfile.write('User Break %s.\n' % (datetime.datetime.now()))
       mylogsfile.close()
       time.sleep(20) #300 calls limit per 15-min window
-      get_location_tweets(geoCodeCoordinates)
+   else:
+        raise Exception('Invalid HARVEST_MODE {}'.format(HARVEST_MODE))
