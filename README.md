@@ -1,4 +1,4 @@
-# TwitterAPI
+# Boston twitter harvest and sentiment analysis
 For cloud and cluster computing By Team 19
 
 --------------------------------------------------------------------------------
