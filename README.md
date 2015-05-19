@@ -1,6 +1,6 @@
 # Boston twitter harvest and analysis
 For cloud and cluster computing By Team 19
-
+External HTTP link -  http://144.6.226.184:5000
 -----------------------------------------------------------------------------------------------------------------
 # Root
 - /cloudsent/           Main analysis part files
