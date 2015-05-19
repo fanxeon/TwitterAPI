@@ -18,11 +18,11 @@ For cloud and cluster computing By Team 19
 - 15/5/2015 : Lots of functions updated
 
 ------------------------------------------------------------------------------------------------------------------
-### Twitter Harvest ###
+### Twitter Harvest 
 `/twitter-harvesters/`
 ##### Prerequisites:
-  - tweepy, couchdb, textblob
-- **TweetMining.py** - Main harvest app for loading data into Couch database 'twitter'(lighter db) and 'twitter_user'(full data volume db )applies in 4 instances with 8GB RAM, 2 Virtual CPU, 10 GB                   disk and 60GB Ephemeral Disk
+  - `python, tweepy, couchdb, textblob`
+- **TweetMining.py** : Main harvest app for loading data into Couch database 'twitter'(lighter db) and 'twitter_user'(full data volume db )applies in 4 instances with 8GB RAM, 2 Virtual CPU, 10 GB                   disk and 60GB Ephemeral Disk
   - **mylogsfile** : record logs in file for monitering status
   - **Twitter API Authentication** : We used 4 access tokens to harvest in the same time in different machines
   - **Analyse_text** : Use TextBlob to analysis specific tweet is negative or positive depends on polarity and store into field sentiment at couchdb
@@ -53,5 +53,28 @@ For cloud and cluster computing By Team 19
 - Run `./destroy-cluster.sh`.
 
 ------------------------------------------------------------------------------------------------------------------
+### Sentiment Analysis with ReST web service
+`/cloudsent/`
+##### Prerequisites:
+  - `python 3, couchdb, flask, textblob`
 
+- **flask_server.py** : Main application file
+  - return sentiment json : '/api/v1/sentiment/<message>', e.g. `http://localhost:5000/api/v1/sentiment/obama`
+  - return graph object : `http://localhost:5000/api/v1/graph/obama`
+  - return particular tweet : `http://localhost:5000/rawtwitter/591823382628413440`
+  - return text of 404 error : 404 NOT FOUND handling 
+`/cloudsent/templates`
+- **index.html**
+  - Main coding file in represental layer
+  - All request except sentiment and graph in URL will be redirect to this homepage
+  - Using javascript to implement via Flask
+`/clousent/static/assets`
+- **/bootstrap/** : use to generate website in quick way
+- **/css/**       : Casde style sheet for controlling web page appearance
+- **/img/**       : All image resources
+- **/js/**        : Lots of Javascript called here
 
+##### Launch
+Copy team19.pem to working directory as access key and use ssh:
+`ssh -i team19.pem -N -L 8000:localhost:5000 ubuntu@144.6.226.184`
+And in web browser type http://localhost:8000 to visit our homepage
