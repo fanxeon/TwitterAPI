@@ -34,7 +34,7 @@
 
     <div class="col-lg-12 search-wrapper">
             <div class="sbox">
-                <input id="search" type="text" placeholder="search sentiments..." class="search">
+                <input type="text" placeholder="search sentiments..." class="search">
                 <i class="glyphicon glyphicon-search"></i>
             </div>
         </div>
@@ -267,7 +267,6 @@
 
     $(document).ready(function(){
         $(".loader").hide();
-        searchSentiments();
 
         $(".tbl-sent tr .btn").click(function(){
             $(".loader").show();
@@ -401,53 +400,33 @@
     }
 
     function searchSentiments(){
-        $("#search").keyup(function(e){
+        $("textarea").keyup(function(e){
             switch (e.keyCode) {
+                case 8:  // Backspace
+                    console.log('backspace'+e);
                 case 9:  // Tab
-                    //console.log('Tab');
+                    console.log('Tab');
                 case 13: // Enter
-                    //console.log('Enter');
+                    console.log('Enter');
                 case 37: // Left
-                    //console.log('Left');
+                    console.log('Left');
                 case 38: // Up
-                    //console.log('Up');
+                    console.log('Up');
                 case 39: // Right
-                    //console.log('Right');
+                    console.log('Right');
                 case 40: // Down
-                    //console.log('Down');
+                    console.log('Down');
                     break;
                 default:
-                    filterTable();
-                    break;
+                    (".tbl-sent tr").each(function(){
+                        var input = $('textarea').val();
+                       // $(this).find
+                    });
 
             }
         });
     }
 
-    function filterTable(){
-        var input = $("#search").val().toLowerCase();
-        if(input.length > 0 ){
-            $(".tbl-sent thead").css("display","none");
-        }
-        else{
-            $(".tbl-sent thead").attr("style","none");
-        }
-
-       $(".tbl-sent tbody tr").attr("style","");
-
-       $(".text").each(function(){
-            var text = $(this).text().toLowerCase();
-            var input = $("#search").val().toLowerCase();
-            if(text.indexOf(input) >= 0){
-                console.log(text, input, text.indexOf(input));
-                //$(".tbl-sent tbody tr").attr("style","");
-            //    $("this").parent().css("display","inherit");
-            }else{
-                $(this).parent().css("display","none");;
-                console.log(text, "not matched");
-            }
-       });
-    }
 
     function drawMap(rows) {
         var data = new google.visualization.DataTable();
@@ -488,7 +467,6 @@
         drawMap(data);
     }
 </script>
-
 
 <div id="n" style="">
 
