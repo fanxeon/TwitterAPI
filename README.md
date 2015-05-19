@@ -18,7 +18,6 @@ For cloud and cluster computing By Team 19
 - 15/5/2015 : Lots of functions updated
 
 ------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------
 ### Twitter Harvest
 /twitter-harvesters/
 **TweetMining.py** - Main harvest app for loading data into Couch database 'twitter'(lighter db) and 'twitter_user'(full data volume db )applies in 4 instances with 8GB RAM, 2 Virtual CPU, 10 GB                   disk and 60GB Ephemeral Disk
