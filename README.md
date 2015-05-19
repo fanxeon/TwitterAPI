@@ -1,5 +1,6 @@
 # TwitterAPI
-For cloud and cluster computing - By Team 19
+For cloud and cluster computing By Team 19
+
 --------------------------------------------------------------------------------
 # Root
 - /cloudsent/           Main analysis part files
