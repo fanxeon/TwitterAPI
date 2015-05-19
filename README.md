@@ -22,6 +22,7 @@ For cloud and cluster computing By Team 19
 `/twitter-harvesters/`
 ##### Prerequisites:
   - `python, tweepy, couchdb, textblob`
+
 - **TweetMining.py** : Main harvest app for loading data into Couch database 'twitter'(lighter db) and 'twitter_user'(full data volume db )applies in 4 instances with 8GB RAM, 2 Virtual CPU, 10 GB                   disk and 60GB Ephemeral Disk
   - **mylogsfile** : record logs in file for monitering status
   - **Twitter API Authentication** : We used 4 access tokens to harvest in the same time in different machines
