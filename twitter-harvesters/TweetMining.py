@@ -9,14 +9,14 @@ from textblob import TextBlob
 ##Environment Variables
 #Initial variables
 HARVEST_MODE = os.environ['HARVEST_MODE']   # Harvest mode: ('CITY', 'USERS')
-logsfile = 'TweetMining.txt'
-geoCodeCoordinates = '42.31,-71.05,300km'
-geoCityName = 'Boston'
+logsfile = os.environ['LOGFILE'] #TweetMining.txt'
+geoCodeCoordinates = os.environ['GEOCOORD'] #'42.31,-71.05,300km'
+geoCityName = os.environ['GEOCITY'] #'Boston'
 #Twitter credentials, keep private
-CONSUMER_KEY = 'VMAXFU1xfYWo8fXeCZlG8FlLq' 
-CONSUMER_SECRET = 'GBUtcNEGtxY8qTkd6jErKI70PBAdIDdUyWZwXg1H6QE7KtbKV4'
-ACCESS_TOKEN = '3180647443-XiL3H0Yxt3qPq7J2HgyzQGLsBhK7CWAnj3etVgW'
-ACCESS_TOKEN_SECRET = 'uD1J2MH7RvQ4MRLrYDlSAc999wHnI8jsPmeK5WHBLG0ky'
+CONSUMER_KEY = os.environ['CONSUMER_KEY']
+CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+ACCESS_TOKEN_SECRET = os.environ['ACCESS_TOKEN_SECRET']
 
 #Opening output file then printing time log
 mylogsfile = open(logsfile, 'a')
