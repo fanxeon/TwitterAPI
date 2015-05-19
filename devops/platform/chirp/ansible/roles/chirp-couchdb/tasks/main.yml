@@ -17,7 +17,7 @@
   uri: 
     url=http://localhost:5984/_replicate
     method=POST
-    body='{"source":"twitter","target":"http://{{ item }}:5984/twitter","continuous":true}'
+    body='{"source":"twitter","target":"http://{{ hostvars[item]['ansible_eth0']['ipv4']['address'] }}:5984/twitter","continuous":true}'
     HEADER_Content-Type="application/json"
     status_code=200,201,202,412
   with_items: "{{ groups[peer_group] | difference([inventory_hostname]) }}"
@@ -25,7 +25,7 @@
   uri: 
     url=http://localhost:5984/_replicate
     method=POST
-    body='{"target":"twitter","source":"http://{{ item }}:5984/twitter","continuous":true}'
+    body='{"target":"twitter","source":"http://{{ hostvars[item]['ansible_eth0']['ipv4']['address'] }}:5984/twitter","continuous":true}'
     HEADER_Content-Type="application/json"
     status_code=200,201,202,412
   with_items: "{{ groups[peer_group] | difference([inventory_hostname]) }}"

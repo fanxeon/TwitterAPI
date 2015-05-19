@@ -2,7 +2,7 @@
 - name: debug
   hosts: chirp
   vars:
-    peers: "{{ groups['chirp'] }}"
+    atm: "{{ groups['chirp'] }}"
   tasks:
     - debug: you msg='{"source":"{{ inventory_hostname }}","target":"{{ item }}","continuous":true,"create_target":true}'
-      with_items: "{{ peers | difference(inventory_hostname )}}"
+      with_items: "{{ atm | difference(inventory_hostname)}}"

@@ -1,6 +1,5 @@
 ---
 ansible_ssh_user: ubuntu
-node_id: "{{inventory_hostname_short.rsplit('-',1)[1]}}"
 persist_mount: "/mnt/per"
 peer_group: "chirp"
 chirp:

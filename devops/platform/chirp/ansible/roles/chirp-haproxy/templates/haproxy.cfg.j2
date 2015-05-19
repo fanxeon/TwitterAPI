@@ -53,25 +53,25 @@ frontend http
 backend www_backend
   balance leastconn
 {% for host in groups[peer_group] %}
-  server www-{{host.split('.',1)[0]}} {{ host }}:8080 check
+  server www-{{hostvars[host]['node_name']}} {{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}:8080 check
 {% endfor %}
 backend mon_backend
   balance leastconn
 {% for host in groups[peer_group] %}
-  server mon-{{host.split('.',1)[0]}} {{ host }}:3737 check
+  server mon-{{hostvars[host]['node_name']}} {{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}:3737 check
 {% endfor %}
 backend ela_backend
   balance leastconn
 {% for host in groups[peer_group] %}
-  server ela-{{host.split('.',1)[0]}} {{ host }}:9200 check
+  server ela-{{hostvars[host]['node_name']}} {{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}:9200 check
 {% endfor %}
 backend kib_backend
   balance roundrobin
 {% for host in groups[peer_group] %}
 {% if loop.first %}
-  server kib-{{host.split('.',1)[0]}} {{ host }}:5601 check
+  server kib-{{hostvars[host]['node_name']}} {{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}:5601 check
 {% else %}
-  server kib-{{host.split('.',1)[0]}} {{ host }}:5601 check backup
+  server kib-{{hostvars[host]['node_name']}} {{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}:5601 check backup
 {% endif %}
 {% endfor %}
 
@@ -80,6 +80,6 @@ backend kib_backend
 backend {{app.prefix}}_backend
   balance leastconn
 {% for host in groups[peer_group] %}
-  server {{app.prefix}}-{{host.split('.',1)[0]}} {{ host }}:{{app.port}} check
+  server {{app.prefix}}-{{hostvars[host]['node_name']}} {{ hostvars[host]['ansible_eth0']['ipv4']['address'] }}:{{app.port}} check
 {% endfor %}
 {% endfor %}

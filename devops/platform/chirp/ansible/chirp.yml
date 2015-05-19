@@ -3,6 +3,8 @@
   hosts: chirp
   sudo: yes
   pre_tasks:
+    # - name: wait for SSH to load
+    #   local_action: wait_for port=22 host="{{ ansible_ssh_host | default(inventory_hostname) }}" search_regex=OpenSSH delay=10 timeout=600
     - name: update apt cache
       apt: update_cache=yes
   roles:
