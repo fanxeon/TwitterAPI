@@ -27,6 +27,7 @@ For cloud and cluster computing By Team 19
   - **Twitter API Authentication** : We used 4 access tokens to harvest in the same time in different machines
   - **Analyse_text** : Use TextBlob to analysis specific tweet is negative or positive depends on polarity and store into field sentiment at couchdb
   - **get_location_tweets** : we use geographic coordinates which is Boston acutally located
+
 ------------------------------------------------------------------------------------------------------------------
 ### Remote configuration
 `/devops/platform/`
@@ -50,6 +51,7 @@ For cloud and cluster computing By Team 19
 
 #####To remove:
 - Run `./destroy-cluster.sh`.
+
 ------------------------------------------------------------------------------------------------------------------
 
 
