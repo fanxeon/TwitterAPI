@@ -8,7 +8,7 @@ For cloud and cluster computing By Team 19
 - */devops/*              Hostfile manage nodes
 - */example-s3/*          Example of configuration
 - */twitter-harvesters/*  The application harvesting codes into couch db
-
+-----------------------------------------------------------------------------------------------------------------
 
 ### Important Update log
 - 27/4/2015 : tweetsmining.py created , Tweets mining started.
@@ -16,6 +16,7 @@ For cloud and cluster computing By Team 19
 - 5/5/2015  : Web service established
 - 10/5/2015 : Analysis part added
 - 15/5/2015 : Lots of functions updated
+- 
 ------------------------------------------------------------------------------------------------------------------
 ### Twitter Harvest
 /twitter-harvesters/
