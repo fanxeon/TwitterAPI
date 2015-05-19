@@ -74,15 +74,6 @@ def get_user_tweets(screen_name):
    except:
       pass  #pass duplication occurence
 
-docs = '''function(doc) {
-        emit(doc._id, 1);
-}'''
-
-usernames = '''function(doc) {
-     if (doc.user) {
-        emit(doc.user.screen_name, 1);
-     }
-}'''
 
 def get_location_tweets(geoCodeCoordinates):
   maxTweets = 44000 #450 calls limit per 15-min window (using 440 as a pre-caution)
