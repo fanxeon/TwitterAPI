@@ -1,4 +1,4 @@
-# Boston twitter harvest and sentiment analysis
+# Boston twitter harvest and analysis
 For cloud and cluster computing By Team 19
 
 --------------------------------------------------------------------------------
