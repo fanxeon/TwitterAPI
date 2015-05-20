@@ -1,3 +1,4 @@
+#Team 19: Boston by Omar El Samad (749907), Samuel Josei Jenkins (389975), Mubashir Munawar (713627), Xuan Fan (653226), Dinni Hayyati (666967)
 # Platform Launch
 
 Platform Launch provisions and configures a cluster from scratch with
