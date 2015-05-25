@@ -1,31 +1,58 @@
 ---
 - name: install httplib2
   apt: name=python-httplib2
+
+- name: wait for all couchdb services to start
+  wait_for: host="{{ hostvars[item]['ansible_eth0']['ipv4']['address'] }}" port=5984
+  with_items: "{{ groups[peer_group] | difference([inventory_hostname]) }}"
+
 - name: create twitter database
-  uri: 
+  uri:
     url=http://localhost:5984/twitter
+    method=PUT
+    status_code=200,201,202,412
+
+- name: create twitter_users database
+  uri:
+    url=http://localhost:5984/twitter_users
     method=PUT
     status_code=200,201,202,412
 
 # NOTE: Using CURL as a workaround as Ansible 1.9.1 has problems uploading data
 - name: upload documents
   synchronize: src=../templates/ dest=/opt/build/
-- name: create twitter default design document
-  shell: "curl -XPUT http://localhost:5984/twitter/_design/default -d @/opt/build/default-design-doc.json"
+- name: create twitter_users default design document
+  shell: "curl -XPUT http://localhost:5984/twitter_users/_design/default -d @/opt/build/twitter-users-design.json"
 
 - name: handle twitter replication
-  uri: 
+  uri:
     url=http://localhost:5984/_replicate
     method=POST
-    body='{"source":"twitter","target":"http://{{ hostvars[item]['ansible_eth0']['ipv4']['address'] }}:5984/twitter","continuous":true}'
+    body="{\"source\":\"twitter\",\"target\":\"http://{{ hostvars[item]['ansible_eth0']['ipv4']['address'] }}:5984/twitter\",\"continuous\":true}"
     HEADER_Content-Type="application/json"
     status_code=200,201,202,412
   with_items: "{{ groups[peer_group] | difference([inventory_hostname]) }}"
 - name: handle twitter replication (other direction)
-  uri: 
+  uri:
     url=http://localhost:5984/_replicate
     method=POST
-    body='{"target":"twitter","source":"http://{{ hostvars[item]['ansible_eth0']['ipv4']['address'] }}:5984/twitter","continuous":true}'
+    body="{\"target\":\"twitter\",\"source\":\"http://{{ hostvars[item]['ansible_eth0']['ipv4']['address'] }}:5984/twitter\",\"continuous\":true}"
+    HEADER_Content-Type="application/json"
+    status_code=200,201,202,412
+  with_items: "{{ groups[peer_group] | difference([inventory_hostname]) }}"
+- name: handle twitter_users replication
+  uri:
+    url=http://localhost:5984/_replicate
+    method=POST
+    body="{\"source\":\"twitter_users\",\"target\":\"http://{{ hostvars[item]['ansible_eth0']['ipv4']['address'] }}:5984/twitter_users\",\"continuous\":true}"
+    HEADER_Content-Type="application/json"
+    status_code=200,201,202,412
+  with_items: "{{ groups[peer_group] | difference([inventory_hostname]) }}"
+- name: handle twitter_users replication (other direction)
+  uri:
+    url=http://localhost:5984/_replicate
+    method=POST
+    body="{\"target\":\"twitter_users\",\"source\":\"http://{{ hostvars[item]['ansible_eth0']['ipv4']['address'] }}:5984/twitter_users\",\"continuous\":true}"
     HEADER_Content-Type="application/json"
     status_code=200,201,202,412
   with_items: "{{ groups[peer_group] | difference([inventory_hostname]) }}"

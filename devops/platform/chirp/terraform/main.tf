@@ -35,7 +35,7 @@ resource "openstack_compute_instance_v2" "peer" {
   count = "${var.peer_node_count}"
 
   # Cloud init
-  user_data = "${file(\"cloud-config.yaml\")}"
+  # user_data = "${file(\"cloud-config.yaml\")}"
 
   # Attach volume
   volume {
