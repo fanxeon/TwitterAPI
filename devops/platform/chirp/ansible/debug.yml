@@ -1,8 +1,0 @@
----
-- name: debug
-  hosts: chirp
-  vars:
-    atm: "{{ groups['chirp'] }}"
-  tasks:
-    - debug: you msg='{"source":"{{ inventory_hostname }}","target":"{{ item }}","continuous":true,"create_target":true}'
-      with_items: "{{ atm | difference(inventory_hostname)}}"
