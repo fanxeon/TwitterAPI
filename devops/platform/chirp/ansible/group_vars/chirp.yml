@@ -8,8 +8,7 @@ chirp:
 couchdb:
   version: 1.6.1
   src: "/home/couchdb/src/couchdb"
-  dest: "/home/couchdb/opt/couchdb"
-  database_dir: "{{ persist_mount }}/couchdb"
+  dest: "{{ persist_mount }}/couchdb"
   ini: "local.ini.j2"
   repo: "git://github.com/apache/couchdb.git"
   host: "0.0.0.0"

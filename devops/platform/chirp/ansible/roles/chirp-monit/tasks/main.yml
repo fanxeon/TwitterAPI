@@ -7,5 +7,5 @@
   template: src=monit.j2 dest=/etc/monit/conf.d/{{item.name}} mode=0644
   with_items:
     - { name: "haproxy" }
-    - { name: "elasticsearch" }
+    # - { name: "elasticsearch" }
   notify: reload monit
