@@ -1,4 +1,4 @@
 [chirp]
-b-1.chi.t19.ninja ansible_ssh_host=45.113.232.149 node_id=1 node_name=b-1
-b-2.chi.t19.ninja ansible_ssh_host=45.113.232.152 node_id=2 node_name=b-2
-b-3.chi.t19.ninja ansible_ssh_host=45.113.232.148 node_id=3 node_name=b-3
+b-1.chi.t19.ninja ansible_ssh_host=45.113.232.148 node_id=1 node_name=b-1
+b-2.chi.t19.ninja ansible_ssh_host=45.113.232.149 node_id=2 node_name=b-2
+b-3.chi.t19.ninja ansible_ssh_host=45.113.232.152 node_id=3 node_name=b-3
