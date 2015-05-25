@@ -5,3 +5,6 @@ twitter:
   access_token: "22651013-tL49l2oBX7ooochixyuzkTqhJBbJbq2oVrDSuEYlB"
   access_token_secret: "oZojkB9n9RP0hf4cfgdVoDT7bHZKbtTkavVPTJxSXxgHr"
   harvest_mode: "CITY"
+  log_file: "tweet-mining.log"
+  geo_coord: "42.31,-71.05,300km"
+  geo_city: "Boston"

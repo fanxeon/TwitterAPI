@@ -64,17 +64,12 @@ apps:
     port: 7000
     prefix: "deb"
   - name: "twitter-sampler"
-    cmd: "python /opt/deploy/twitter-machine-sampler.py"
+    cmd: "python /opt/deploy/TweetMining.py"
     cwd: "/opt/deploy/cwd"
     port: 9999 # Fake number, as sampler does not have a web monitor yet.
     prefix: "har"
-  - name: "web-service"
-    cmd: "python /opt/deploy/web-svc/webservice.py 3030"
-    cwd: "/opt/deploy/web-svc"
-    port: 3030
-    prefix: "svc"
-  - name: "analysis"
-    cmd: "python /opt/deploy/analysis/myapp.py"
-    cwd: "/opt/deploy/analysis"
+  - name: "cloudsent"
+    cmd: "python /opt/deploy/cloudsent/flask_server.py"
+    cwd: "/opt/deploy/cloudsent"
     port: 5000
-    prefix: "ana"
+    prefix: "clo"

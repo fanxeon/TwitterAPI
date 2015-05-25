@@ -4,19 +4,20 @@ import json
 import os
 import couchdb
 import datetime
+import random
 from textblob import TextBlob
 
 ##Environment Variables
 #Initial variables
-HARVEST_MODE = os.environ['HARVEST_MODE']   # Harvest mode: ('CITY', 'USERS')
-logsfile = os.environ['LOGFILE'] #TweetMining.txt'
-geoCodeCoordinates = os.environ['GEOCOORD'] #'42.31,-71.05,300km'
-geoCityName = os.environ['GEOCITY'] #'Boston'
+HARVEST_MODE = os.environ['TWITTER_HARVEST_MODE']   # Harvest mode: ('CITY', 'USERS')
+logsfile = os.environ['TWITTER_LOGFILE'] #TweetMining.txt'
+geoCodeCoordinates = os.environ['TWITTER_GEOCOORD'] #'42.31,-71.05,300km'
+geoCityName = os.environ['TWITTER_GEOCITY'] #'Boston'
 #Twitter credentials, keep private
-CONSUMER_KEY = os.environ['CONSUMER_KEY']
-CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
-ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
-ACCESS_TOKEN_SECRET = os.environ['ACCESS_TOKEN_SECRET']
+CONSUMER_KEY = os.environ['TWITTER_CONSUMER_KEY']
+CONSUMER_SECRET = os.environ['TWITTER_CONSUMER_SECRET']
+ACCESS_TOKEN = os.environ['TWITTER_ACCESS_TOKEN']
+ACCESS_TOKEN_SECRET = os.environ['TWITTER_ACCESS_TOKEN_SECRET']
 
 #Opening output file then printing time log
 mylogsfile = open(logsfile, 'a')

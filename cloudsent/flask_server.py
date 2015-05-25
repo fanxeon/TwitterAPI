@@ -53,8 +53,8 @@ def rawtweet(tweetid):
 
 
 # TEMPLATES VIEW - Get particular tweet - NOT USING
-@app.route('/viewtweet/<tweetid>')
-def viewtweet(tweetid):
+#@app.route('/viewtweet/<tweetid>')
+#def viewtweet(tweetid):
 #results = database.get(tweetid)
 #if results['analytics']['sentiment'] == 'positive' :
 #    return render.result_pos(results)
@@ -75,4 +75,4 @@ def page_not_found(error):
 
  
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host= '0.0.0.0', debug=True)
