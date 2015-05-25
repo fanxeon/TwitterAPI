@@ -1,7 +1,7 @@
-#Team 19: Boston by Omar El Samad (749907), Samuel Josei Jenkins (389975), Mubashir Munawar (713627), Xuan Fan (653226), Dinni Hayyati (666967)
+Team 19: Boston by Omar El Samad (749907), Samuel Josei Jenkins (389975), Mubashir Munawar (713627), Xuan Fan (653226), Dinni Hayyati (666967)
 # Boston twitter harvest and analysis
 For cloud and cluster computing By Team 19
-###### External HTTP link -  [http://144.6.226.184:5000](http://144.6.226.184:5000)
+###### External HTTP link -  [http://144.6.226.184](http://144.6.226.184)
 -----------------------------------------------------------------------------------------------------------------
 ### Root
 - */cloudsent/*           Main analysis part files , folder *analysis* is not using anymore
@@ -65,11 +65,13 @@ For cloud and cluster computing By Team 19
   - return graph object : `http://localhost:5000/api/v1/graph/obama`
   - return particular tweet : `http://localhost:5000/rawtwitter/591823382628413440`
   - return text of 404 error : 404 NOT FOUND handling 
+
 `/cloudsent/templates`
 - **index.html**
   - Main coding file in represental layer
   - All request except sentiment and graph in URL will be redirect to this homepage
   - Using javascript to implement via Flask
+
 `/clousent/static/assets`
 - **/bootstrap/** : use to generate website in quick way
 - **/css/**       : Casde style sheet for controlling web page appearance
